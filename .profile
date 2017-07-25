@@ -66,9 +66,14 @@ elif type compctl &>/dev/null; then
 fi
 ###-end-npm-completion-###
 
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+  . $(brew --prefix)/etc/bash_completion
+fi
+
 alias ls="ls -Gp"
 alias gw="./gradlew"
 alias git-search="git branch -r --contains"
 alias publishLocal="gw printVersion publishToMavenLocal"
 alias vim="/usr/local/bin/vim"
 alias vi="/usr/local/bin/vim"
+alias simpleWebServer="python -m SimpleHTTPServer 8000"
