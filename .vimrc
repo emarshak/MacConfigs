@@ -8,3 +8,6 @@ set ts=4 sw=4 expandtab smarttab
 set backspace=2
 set laststatus=2
 set statusline=%F\ %l,%c
+
+syntax on
+filetype indent plugin on
