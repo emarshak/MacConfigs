@@ -3,7 +3,11 @@ export EDITOR=vim
 YELLOW='\e[0;93m'
 RED='\e[1;31m'
 
-PS1="\[$YELLOW\]\u@\[$RED\]\h:\w\$\[\e[0m\] "
+parse_git_branch() {
+     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
+
+PS1="\[$YELLOW\]\u@\[$RED\]\h:\w\$(parse_git_branch)\$\[\e[0m\] "
 
 ###-begin-npm-completion-###
 #
@@ -67,7 +71,7 @@ fi
 ###-end-npm-completion-###
 
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
-  . $(brew --prefix)/etc/bash_completion
+ . $(brew --prefix)/etc/bash_completion
 fi
 
 alias ls="ls -Gp"
@@ -76,4 +80,17 @@ alias git-search="git branch -r --contains"
 alias publishLocal="gw printVersion publishToMavenLocal"
 alias vim="/usr/local/bin/vim"
 alias vi="/usr/local/bin/vim"
-alias simpleWebServer="python -m SimpleHTTPServer 8000"
+alias webServer="python -m SimpleHTTPServer 8000"
+
+export PYENV_ROOT=/usr/local/opt/pyenv
+eval "$(pyenv init -)"
+# pyenv global 3.7.0
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/emarshak/Downloads/google-cloud-sdk/path.bash.inc' ]; then . '/Users/emarshak/Downloads/google-cloud-sdk/path.bash.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/emarshak/Downloads/google-cloud-sdk/completion.bash.inc' ]; then . '/Users/emarshak/Downloads/google-cloud-sdk/completion.bash.inc'; fi
