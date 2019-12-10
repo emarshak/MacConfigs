@@ -74,12 +74,17 @@ if [ -f $(brew --prefix)/etc/bash_completion ]; then
  . $(brew --prefix)/etc/bash_completion
 fi
 
+if test -f "/usr/local/bin/vim"; then
+    alias vim="/usr/local/bin/vim"
+    alias vi="/usr/local/bin/vim"
+else
+    echo "vi not installed by homebrew; .vimrc may not work as expected"
+fi
+
 alias ls="ls -Gp"
 alias gw="./gradlew"
 alias git-search="git branch -r --contains"
 alias publishLocal="gw printVersion publishToMavenLocal"
-alias vim="/usr/local/bin/vim"
-alias vi="/usr/local/bin/vim"
 alias webServer="python -m SimpleHTTPServer 8000"
 alias gs="git status"
 alias gco="git commit"
